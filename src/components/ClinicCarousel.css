@@ -1,0 +1,276 @@
+/* Clinic Carousel Styles */
+
+.clinic-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  z-index: 10;
+}
+
+.carousel-slide.inactive {
+  opacity: 0;
+  z-index: 0;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease-in-out;
+  will-change: opacity;
+}
+
+.carousel-image.loaded {
+  opacity: 1;
+}
+
+.carousel-image.loading {
+  opacity: 0;
+}
+
+.carousel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 50%, transparent 100%);
+  pointer-events: none;
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  color: white;
+  z-index: 15;
+}
+
+.carousel-caption h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-caption-line {
+  width: 3rem;
+  height: 0.25rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 9999px;
+}
+
+/* Navigation Controls */
+.carousel-nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  opacity: 0;
+  z-index: 20;
+  border: none;
+  cursor: pointer;
+}
+
+.carousel-nav-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-nav-button.prev {
+  left: 1rem;
+}
+
+.carousel-nav-button.next {
+  right: 1rem;
+}
+
+.clinic-carousel:hover .carousel-nav-button {
+  opacity: 1;
+}
+
+/* Pagination Dots */
+.carousel-pagination {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 20;
+}
+
+.carousel-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.carousel-dot.active {
+  background-color: white;
+  transform: scale(1.25);
+}
+
+.carousel-dot:hover {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+/* Progress Bar */
+.carousel-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.25rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: 20;
+}
+
+.carousel-progress-bar {
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  transition: width 0.3s ease;
+}
+
+/* Pause Indicator */
+.carousel-pause-indicator {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  z-index: 20;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.clinic-carousel:hover .carousel-pause-indicator {
+  opacity: 1;
+}
+
+/* Loading Placeholder */
+.carousel-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-spinner {
+  width: 4rem;
+  height: 4rem;
+  border: 0.25rem solid #e5e7eb;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .carousel-caption {
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+  }
+  
+  .carousel-caption h3 {
+    font-size: 1rem;
+  }
+  
+  .carousel-nav-button {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .carousel-nav-button.prev {
+    left: 0.5rem;
+  }
+  
+  .carousel-nav-button.next {
+    right: 0.5rem;
+  }
+  
+  .carousel-pause-indicator {
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.625rem;
+    padding: 0.125rem 0.5rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-slide,
+  .carousel-image,
+  .carousel-nav-button,
+  .carousel-dot,
+  .carousel-progress-bar {
+    transition: none;
+  }
+  
+  .carousel-spinner {
+    animation: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .carousel-nav-button {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid white;
+  }
+  
+  .carousel-dot {
+    border: 1px solid white;
+  }
+  
+  .carousel-pause-indicator {
+    background-color: black;
+    border: 1px solid white;
+  }
+}

@@ -1,0 +1,37 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle for spacing -->
+  <circle cx="200" cy="200" r="180" fill="none"/>
+  
+  <!-- Dr. Gandhi's signature text -->
+  <text x="200" y="120" font-family="cursive, serif" font-size="24" font-weight="400" fill="#333" text-anchor="middle" style="font-style: italic;">Dr. Gandhi's</text>
+  <text x="280" y="105" font-family="serif" font-size="16" font-weight="bold" fill="#333">TM</text>
+  
+  <!-- Tooth icon - stylized dental symbol -->
+  <g transform="translate(200, 160)">
+    <!-- Orange left part -->
+    <path d="M-25,-20 Q-35,-10 -35,10 Q-35,25 -25,35 Q-15,40 0,35 L0,-20 Z" fill="#FF8C42"/>
+    <!-- Blue right part -->
+    <path d="M25,-20 Q35,-10 35,10 Q35,25 25,35 Q15,40 0,35 L0,-20 Z" fill="#4ECDC4"/>
+    <!-- Center overlap -->
+    <path d="M-5,-20 L5,-20 L5,35 Q0,40 -5,35 Z" fill="#2E86AB"/>
+  </g>
+  
+  <!-- Circular text "DENTAL AVENUE" -->
+  <defs>
+    <path id="circle-path" d="M 200,200 m -100,0 a 100,100 0 1,1 200,0 a 100,100 0 1,1 -200,0"/>
+  </defs>
+  
+  <!-- Left side text "DENTAL" -->
+  <text font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#333">
+    <textPath href="#circle-path" startOffset="5%">D E N T A L</textPath>
+  </text>
+  
+  <!-- Right side text "AVENUE" -->
+  <text font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#333">
+    <textPath href="#circle-path" startOffset="55%">A V E N U E</textPath>
+  </text>
+  
+  <!-- Bottom text "DENTAL AVENUE" -->
+  <text x="200" y="320" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#FF8C42" text-anchor="middle">DENTAL</text>
+  <text x="200" y="355" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#4ECDC4" text-anchor="middle">AVENUE</text>
+</svg>

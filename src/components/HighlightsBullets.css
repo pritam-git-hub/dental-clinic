@@ -1,0 +1,142 @@
+/* Highlights Bullets Component Styles */
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* Mobile: 1 column */
+@media (min-width: 640px) {
+  .highlights-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 768px) {
+  .highlights-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Desktop: 4 columns */
+@media (min-width: 1024px) {
+  .highlights-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.highlight-card {
+  background: #ffffff;
+  border: 1px solid #f3f4f6;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.highlight-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+}
+
+.highlight-card:focus-within {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.highlight-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  width: 18px;
+  height: 18px;
+}
+
+.highlight-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.highlight-title {
+  font-weight: 600;
+  color: #111827;
+  font-size: 14px;
+  line-height: 1.25;
+  margin-bottom: 8px;
+  word-wrap: break-word;
+}
+
+.highlight-description {
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+/* Ensure proper spacing between icon and content */
+.highlight-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* Color variations for better contrast */
+.icon-blue { color: #2563eb; }
+.icon-red { color: #dc2626; }
+.icon-yellow { color: #d97706; }
+.icon-green { color: #059669; }
+.icon-purple { color: #7c3aed; }
+.icon-indigo { color: #4f46e5; }
+.icon-pink { color: #db2777; }
+.icon-teal { color: #0d9488; }
+
+/* Responsive typography adjustments */
+@media (max-width: 640px) {
+  .highlight-title {
+    font-size: 13px;
+  }
+  
+  .highlight-description {
+    font-size: 11px;
+  }
+  
+  .highlight-card {
+    padding: 12px;
+  }
+  
+  .highlight-layout {
+    gap: 10px;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .highlight-card {
+    transition: none;
+  }
+  
+  .highlight-card:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .highlight-card {
+    border-color: #374151;
+  }
+  
+  .highlight-title {
+    color: #000000;
+  }
+  
+  .highlight-description {
+    color: #374151;
+  }
+}

@@ -1,0 +1,130 @@
+/* Patient Feedback Ticker Styles */
+
+.feedback-ticker-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.feedback-ticker {
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.feedback-ticker::-webkit-scrollbar {
+  display: none;
+}
+
+.feedback-card {
+  flex-shrink: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.feedback-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.gradient-overlay-left {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 80px;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+  z-index: 10;
+  pointer-events: none;
+}
+
+.gradient-overlay-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 80px;
+  height: 100%;
+  background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+  z-index: 10;
+  pointer-events: none;
+}
+
+.pause-indicator {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+  z-index: 20;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.feedback-ticker-container:hover .pause-indicator {
+  opacity: 1;
+}
+
+.testimonial-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .feedback-card {
+    width: 280px;
+  }
+  
+  .gradient-overlay-left,
+  .gradient-overlay-right {
+    width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .feedback-card {
+    width: 260px;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .feedback-card {
+    transition: none;
+  }
+  
+  .feedback-ticker {
+    scroll-behavior: auto;
+  }
+}
+
+/* Focus styles for accessibility */
+.feedback-card:focus-within {
+  outline: 2px solid #3B82F6;
+  outline-offset: 2px;
+}
+
+/* Star rating animations */
+.star-rating {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+.star-rating svg {
+  transition: transform 0.2s ease;
+}
+
+.feedback-card:hover .star-rating svg {
+  transform: scale(1.1);
+}

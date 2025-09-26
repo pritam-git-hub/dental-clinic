@@ -1,0 +1,35 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="90" fill="#f8f9fa" stroke="#e9ecef" stroke-width="2"/>
+  
+  <!-- Tooth shape with gradient -->
+  <defs>
+    <linearGradient id="toothGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff8c00;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#00bcd4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2196f3;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main tooth shape -->
+  <path d="M70 60 Q100 50 130 60 Q140 70 140 85 Q140 110 130 130 Q120 145 110 155 Q105 160 100 165 Q95 160 90 155 Q80 145 70 130 Q60 110 60 85 Q60 70 70 60 Z" fill="url(#toothGradient)" stroke="white" stroke-width="2"/>
+  
+  <!-- Highlight on tooth -->
+  <ellipse cx="90" cy="80" rx="8" ry="15" fill="white" opacity="0.6"/>
+  
+  <!-- Text around the logo -->
+  <path id="circle-text" d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0" fill="none" stroke="none"/>
+  
+  <!-- Top text "Dr. Gandhi's" -->
+  <text font-family="serif" font-size="14" font-weight="bold" fill="#333">
+    <textPath href="#circle-text" startOffset="25%">Dr. Gandhi's</textPath>
+  </text>
+  
+  <!-- Bottom text "DENTAL AVENUE" -->
+  <text font-family="sans-serif" font-size="10" font-weight="normal" fill="#666" letter-spacing="2px">
+    <textPath href="#circle-text" startOffset="75%">DENTAL AVENUE</textPath>
+  </text>
+  
+  <!-- TM symbol -->
+  <text x="170" y="40" font-family="sans-serif" font-size="12" font-weight="bold" fill="#333">TM</text>
+</svg>

@@ -1,0 +1,15 @@
+<svg viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Tooth icon - simplified @2x -->
+  <g transform="translate(40, 40)">
+    <!-- Orange left part -->
+    <path d="M-16,-24 Q-24,-12 -24,12 Q-24,24 -16,32 Q-8,36 0,32 L0,-24 Z" fill="#FF8C42"/>
+    <!-- Blue right part -->
+    <path d="M16,-24 Q24,-12 24,12 Q24,24 16,32 Q8,36 0,32 L0,-24 Z" fill="#4ECDC4"/>
+    <!-- Center overlap -->
+    <path d="M-4,-24 L4,-24 L4,32 Q0,36 -4,32 Z" fill="#2E86AB"/>
+  </g>
+  
+  <!-- Text "DENTAL AVENUE" @2x -->
+  <text x="90" y="30" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FF8C42">DENTAL</text>
+  <text x="90" y="56" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#4ECDC4">AVENUE</text>
+</svg>
