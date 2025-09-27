@@ -135,7 +135,7 @@ const AdminLogin = () => {
                   type="text"
                   autoComplete="username"
                   className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
-                  placeholder="admin@dentalavenue.com or pg13000122017"
+                  placeholder="Enter your email or user ID"
                 />
               </div>
               {errors.emailOrId && (
@@ -219,18 +219,6 @@ const AdminLogin = () => {
             </button>
           </div>
 
-          {/* Demo Credentials */}
-          <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-            <h4 className="text-sm font-medium text-gray-700 mb-2">Demo Credentials:</h4>
-            <div className="text-xs text-gray-600 space-y-1">
-              <div><strong>Super Admin ID:</strong> pg13000122017</div>
-              <div><strong>Password:</strong> pg13000122017</div>
-              <div className="mt-2 pt-2 border-t border-gray-300">
-                <div><strong>Legacy Admin:</strong> admin@dentalavenue.com</div>
-                <div><strong>Password:</strong> Admin@123456</div>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Forgot Password Modal */}

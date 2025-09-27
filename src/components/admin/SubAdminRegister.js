@@ -9,9 +9,7 @@ import {
   FaLock, 
   FaEye, 
   FaEyeSlash,
-  FaShieldAlt,
   FaCheck,
-  FaTimes,
   FaSpinner
 } from 'react-icons/fa';
 import authService from '../../services/AuthService';
@@ -31,16 +29,10 @@ const registerSchema = z.object({
 });
 
 const SubAdminRegister = ({ onBack }) => {
-  const [step, setStep] = useState(1); // 1: Form, 2: OTP, 3: Success
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [otpSent, setOtpSent] = useState(false);
-  const [formData, setFormData] = useState(null);
-  const [otpData, setOtpData] = useState({
-    mobileOTP: '',
-    emailOTP: ''
-  });
+  const [success, setSuccess] = useState(false);
 
   const { register, handleSubmit, formState: { errors }, watch } = useForm({
     resolver: zodResolver(registerSchema)
@@ -75,69 +67,24 @@ const SubAdminRegister = ({ onBack }) => {
 
   const onSubmit = async (data) => {
     setLoading(true);
-    setFormData(data);
     
     try {
-      // Send OTP to phone and email
-      const result = await authService.sendOTP(data.phone, data.email);
+      // Register sub admin directly (no OTP required)
+      const result = await authService.registerSubAdmin(data);
       
       if (result.success) {
-        setOtpSent(true);
-        setStep(2);
+        setSuccess(true);
       } else {
-        alert(result.error);
+        alert(result.error || 'Registration failed. Please try again.');
       }
     } catch (error) {
-      alert('Failed to send OTP. Please try again.');
+      alert('Registration failed. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleOTPVerification = async () => {
-    setLoading(true);
-    
-    try {
-      const otpResult = await authService.verifyOTP(otpData.mobileOTP, otpData.emailOTP);
-      
-      if (otpResult.success) {
-        // Register the sub admin
-        const registerResult = await authService.registerSubAdmin(formData);
-        
-        if (registerResult.success) {
-          setStep(3);
-        } else {
-          alert(registerResult.error);
-        }
-      } else {
-        alert(otpResult.error);
-      }
-    } catch (error) {
-      alert('Verification failed. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const resendOTP = async () => {
-    if (!formData) return;
-    
-    setLoading(true);
-    try {
-      const result = await authService.sendOTP(formData.phone, formData.email);
-      if (result.success) {
-        alert('OTP resent successfully');
-      } else {
-        alert(result.error);
-      }
-    } catch (error) {
-      alert('Failed to resend OTP');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (step === 3) {
+  if (success) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500 flex items-center justify-center p-4">
         <div className="max-w-md w-full">
@@ -162,87 +109,6 @@ const SubAdminRegister = ({ onBack }) => {
     );
   }
 
-  if (step === 2) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500 flex items-center justify-center p-4">
-        <div className="max-w-md w-full">
-          <div className="bg-white rounded-2xl shadow-2xl p-8">
-            <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <FaShieldAlt className="text-primary-600" size={24} />
-              </div>
-              <h2 className="text-2xl font-bold text-neutral-900 mb-2">Verify OTP</h2>
-              <p className="text-neutral-600">
-                Enter the OTP sent to your mobile and email
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-2">
-                  Mobile OTP (sent to {formData?.phone})
-                </label>
-                <input
-                  type="text"
-                  maxLength="6"
-                  value={otpData.mobileOTP}
-                  onChange={(e) => setOtpData(prev => ({ ...prev, mobileOTP: e.target.value }))}
-                  className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-center text-lg font-mono"
-                  placeholder="000000"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-2">
-                  Email OTP (sent to {formData?.email})
-                </label>
-                <input
-                  type="text"
-                  maxLength="6"
-                  value={otpData.emailOTP}
-                  onChange={(e) => setOtpData(prev => ({ ...prev, emailOTP: e.target.value }))}
-                  className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-center text-lg font-mono"
-                  placeholder="000000"
-                />
-              </div>
-
-              <button
-                onClick={handleOTPVerification}
-                disabled={loading || !otpData.mobileOTP || !otpData.emailOTP}
-                className="w-full bg-primary-600 text-white py-3 px-4 rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium flex items-center justify-center space-x-2"
-              >
-                {loading ? (
-                  <>
-                    <FaSpinner className="animate-spin" />
-                    <span>Verifying...</span>
-                  </>
-                ) : (
-                  <span>Verify & Register</span>
-                )}
-              </button>
-
-              <div className="text-center">
-                <button
-                  onClick={resendOTP}
-                  disabled={loading}
-                  className="text-primary-600 hover:text-primary-700 text-sm font-medium"
-                >
-                  Resend OTP
-                </button>
-              </div>
-
-              <button
-                onClick={() => setStep(1)}
-                className="w-full text-neutral-600 hover:text-neutral-800 py-2 text-sm"
-              >
-                Back to Form
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500 flex items-center justify-center p-4">
@@ -433,10 +299,10 @@ const SubAdminRegister = ({ onBack }) => {
                 {loading ? (
                   <>
                     <FaSpinner className="animate-spin" />
-                    <span>Sending OTP...</span>
+                    <span>Submitting...</span>
                   </>
                 ) : (
-                  <span>Send OTP & Continue</span>
+                  <span>Submit Registration</span>
                 )}
               </button>
             </div>

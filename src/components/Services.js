@@ -22,27 +22,20 @@ const Services = () => {
 
       {/* Direct Services Listing */}
       <div className="animate-scale-in">
-        <div className="text-center mb-4">
-          <p>Total Services: {services.length}</p>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3">
           {services && services.length > 0 ? services.sort().map((service, index) => (
             <Card
               key={`service-${index}`}
               className="group hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-102 bg-white border border-neutral-200 hover:border-primary-300 cursor-pointer"
             >
-              <div className="flex items-center space-x-3 p-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center group-hover:from-primary-600 group-hover:to-primary-700 transition-all duration-300 shadow-md">
-                  <FaTooth size={14} className="text-white" />
+              <div className="flex items-center space-x-3 p-3">
+                <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center group-hover:from-primary-600 group-hover:to-primary-700 transition-all duration-300 shadow-md">
+                  <FaTooth size={12} className="text-white" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-semibold text-neutral-900 group-hover:text-primary-700 transition-colors text-sm leading-tight">
+                  <h4 className="font-semibold text-neutral-900 group-hover:text-primary-700 transition-colors text-xs leading-tight">
                     {service}
                   </h4>
-                  <div className="flex items-center mt-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse-gentle mr-2"></div>
-                    <span className="text-xs text-green-600 font-medium">Available</span>
-                  </div>
                 </div>
               </div>
             </Card>

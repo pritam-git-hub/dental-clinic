@@ -7,7 +7,6 @@ import Doctors from './components/Doctors.js';
 import PatientFeedbackTicker from './components/PatientFeedbackTicker.js';
 import Location from './components/Location.js';
 import HighlightsBullets from './components/HighlightsBullets.js';
-import AppointmentForm from './components/AppointmentForm.js';
 import Footer from './components/Footer.js';
 import AdminLogin from './components/admin/AdminLogin.js';
 import AdminLayout from './components/admin/AdminLayout.js';
@@ -34,7 +33,7 @@ const PublicSite = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'services', 'doctors', 'feedback', 'location', 'appointment'];
+      const sections = ['home', 'services', 'doctors', 'feedback', 'location', 'highlights'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -102,9 +101,6 @@ const PublicSite = () => {
           <HighlightsBullets />
         </section>
         
-        <section id="appointment">
-          <AppointmentForm />
-        </section>
       </main>
       
       <Footer scrollToSection={scrollToSection} />

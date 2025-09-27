@@ -48,10 +48,7 @@ const Doctors = () => {
 
       {/* Direct Doctors Listing */}
       <div className="animate-scale-in">
-        <div className="text-center mb-4">
-          <p>Total Doctors: {doctors.length}</p>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
           {doctors && doctors.length > 0 ? doctors.map((doctor, index) => {
             const departmentConfig = getDepartmentIcon(doctor.department);
             const DepartmentIcon = departmentConfig.icon;
@@ -68,15 +65,11 @@ const Doctors = () => {
                       <FaUserMd size={10} className="text-neutral-600" />
                     </div>
                   </div>
-                  <h4 className="font-bold text-neutral-900 mb-2 group-hover:text-primary-700 transition-colors">
+                  <h4 className="text-lg font-bold text-neutral-900 mb-2 group-hover:text-primary-700 transition-colors">
                     {doctor.name}
                   </h4>
-                  <p className="text-sm text-neutral-600 mb-2">{doctor.role}</p>
-                  <p className="text-xs text-neutral-500">{doctor.credentials}</p>
-                  <div className="flex items-center justify-center mt-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse-gentle mr-2"></div>
-                    <span className="text-xs text-green-600 font-medium">Available</span>
-                  </div>
+                  <p className="text-xs text-neutral-500 mb-1">{doctor.credentials}</p>
+                  <p className="text-sm text-neutral-600">{doctor.role}</p>
                 </div>
               </Card>
             );

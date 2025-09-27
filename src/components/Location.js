@@ -23,8 +23,8 @@ const Location = () => {
         </div>
 
         {/* Main Office - New Town */}
-        <div className="bg-gradient-to-r from-primary-50 to-secondary-50 rounded-2xl p-8 mb-12 border-2 border-primary-200">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
+        <div className="bg-gradient-to-r from-primary-50 to-secondary-50 rounded-2xl p-4 sm:p-6 lg:p-8 mb-8 lg:mb-12 border-2 border-primary-200">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
             <div>
               <h3 className="text-3xl font-bold text-primary-700 mb-4">
                 🏥 Newtown Clinic
@@ -91,7 +91,7 @@ const Location = () => {
         {/* Other Branches */}
         <div className="mb-12">
           <h3 className="text-2xl font-bold text-neutral-900 mb-8 text-center">Our Other Locations</h3>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {[
               {
                 name: "Lansdowne Paddapukur",
@@ -127,77 +127,49 @@ const Location = () => {
               </div>
             ))}
           </div>
-          <div className="mt-6 p-4 bg-primary-50 rounded-lg text-center">
-            <p className="text-sm text-primary-700">
-              <strong>Note:</strong> This website represents our New Town location. 
-              Please contact us for information about services at other branches.
-            </p>
-          </div>
         </div>
 
-        {/* Contact Information Cards */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {/* Opening Hours */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+        {/* Contact Information Card */}
+        <div className="max-w-2xl mx-auto">
+          {/* Contact Us - Single Card */}
+          <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 shadow-xl border-2 border-gradient-to-r from-blue-200 to-purple-200 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
             <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <FaClock className="text-green-600" size={24} />
-              </div>
-              <h3 className="text-xl font-bold text-neutral-900 mb-4">Opening Hours</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-neutral-600">Monday - Saturday</span>
-                  <span className="font-semibold text-neutral-900">9 AM - 5 PM</span>
+              <div className="flex justify-center space-x-4 mb-6">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <FaPhoneAlt className="text-blue-600" size={20} />
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-neutral-600">Sunday</span>
-                  <span className="font-semibold text-red-600">Closed</span>
+                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                  <FaEnvelope className="text-purple-600" size={20} />
                 </div>
               </div>
-              <div className="mt-4 inline-flex items-center space-x-2 bg-green-50 text-green-700 px-4 py-2 rounded-full text-sm font-medium">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span>Open Today</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Call Us */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <FaPhoneAlt className="text-blue-600" size={24} />
-              </div>
-              <h3 className="text-xl font-bold text-neutral-900 mb-4">Call Us</h3>
-              <div className="space-y-3">
+              <h3 className="text-2xl font-bold text-neutral-900 mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Contact Us</h3>
+              
+              {/* Phone Numbers */}
+              <div className="space-y-3 mb-6">
+                <h4 className="text-lg font-semibold text-neutral-800 mb-3">Call Us</h4>
                 {siteConfig.phones.map((phone, index) => (
                   <a
                     key={index}
                     href={`tel:${phone}`}
-                    className="flex items-center justify-between text-lg font-semibold text-primary-600 hover:text-primary-700 transition-colors py-2 px-4 rounded-lg hover:bg-primary-50"
+                    className="flex items-center justify-center space-x-3 text-lg font-semibold text-blue-600 hover:text-blue-700 transition-colors py-3 px-4 rounded-lg hover:bg-white hover:bg-opacity-80 border border-blue-200 hover:border-blue-300"
                   >
-                    <span>{phone}</span>
                     <FaPhoneAlt className="text-blue-600" size={16} />
+                    <span>{phone}</span>
                   </a>
                 ))}
               </div>
-              <p className="text-sm text-neutral-500 mt-4">Available during clinic hours</p>
-            </div>
-          </div>
-
-          {/* Email Us */}
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <FaEnvelope className="text-purple-600" size={24} />
+              
+              {/* Email */}
+              <div>
+                <h4 className="text-lg font-semibold text-neutral-800 mb-3">Email Us</h4>
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="inline-flex items-center space-x-3 text-lg font-semibold text-purple-600 hover:text-purple-700 transition-colors py-3 px-6 rounded-lg hover:bg-white hover:bg-opacity-80 border border-purple-200 hover:border-purple-300"
+                >
+                  <FaEnvelope size={16} />
+                  <span>{siteConfig.email}</span>
+                </a>
               </div>
-              <h3 className="text-xl font-bold text-neutral-900 mb-4">Email Us</h3>
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="inline-block text-lg font-semibold text-primary-600 hover:text-primary-700 transition-colors py-3 px-6 rounded-lg hover:bg-primary-50 border border-primary-200"
-              >
-                {siteConfig.email}
-              </a>
-              <p className="text-sm text-neutral-500 mt-4">We'll respond within 24 hours</p>
             </div>
           </div>
         </div>

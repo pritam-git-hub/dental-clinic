@@ -81,9 +81,14 @@ const Header = ({ activeSection, scrollToSection }) => {
               className="me-2"
               style={{ height: '40px', width: 'auto' }}
             />
-            <span className="font-bold text-xl lg:text-2xl text-primary-700 hover:text-primary-800 transition-colors d-none d-md-inline">
-              {siteConfig.name}
-            </span>
+            <div className="d-flex flex-column">
+              <span className="font-bold text-lg sm:text-xl lg:text-2xl text-primary-700 hover:text-primary-800 transition-colors">
+                DR. GANDHI'S
+              </span>
+              <span className="font-bold text-base sm:text-lg lg:text-xl text-secondary-600 hover:text-secondary-700 transition-colors">
+                DENTAL AVENUE
+              </span>
+            </div>
           </a>
 
           {/* Mobile menu toggle */}

@@ -446,49 +446,139 @@ class AuthService {
     return { success: true, message: 'Super admin created successfully' };
   }
 
-  // OTP Simulation (in production, this would be real OTP service)
-  async sendOTP(phone, email) {
-    // Simulate OTP generation
-    const mobileOTP = Math.floor(100000 + Math.random() * 900000).toString();
-    const emailOTP = Math.floor(100000 + Math.random() * 900000).toString();
-    
-    // Store OTPs temporarily (in production, this would be server-side)
-    const otpData = {
-      mobile: { otp: mobileOTP, phone, timestamp: Date.now() },
-      email: { otp: emailOTP, email, timestamp: Date.now() }
-    };
-    
-    localStorage.setItem('tempOTP', JSON.stringify(otpData));
-    
-    // Simulate sending (in production, integrate with SMS and email services)
-    console.log(`Mobile OTP for ${phone}: ${mobileOTP}`);
-    console.log(`Email OTP for ${email}: ${emailOTP}`);
-    
-    return { success: true, message: 'OTP sent successfully' };
+  // Verify if user exists for OTP login
+  async verifyUserExists(emailOrId) {
+    try {
+      // Check super admin credentials
+      if (emailOrId === this.adminCredentials.superAdmin.id || 
+          emailOrId === this.adminCredentials.superAdmin.email) {
+        return { success: true, user: this.adminCredentials.superAdmin };
+      }
+
+      // Check legacy admin credentials
+      if (emailOrId === this.adminCredentials.admin.email || 
+          emailOrId === this.adminCredentials.admin.id) {
+        return { success: true, user: this.adminCredentials.admin };
+      }
+
+      // Check additional super admins
+      const additionalSuperAdmins = localStorage.getItem('superAdmins');
+      if (additionalSuperAdmins) {
+        const superAdmins = JSON.parse(additionalSuperAdmins);
+        const superAdmin = superAdmins.find(admin => 
+          admin.email === emailOrId || admin.id === emailOrId
+        );
+        
+        if (superAdmin) {
+          return { success: true, user: superAdmin };
+        }
+      }
+
+      // Check sub admin accounts
+      const subAdmins = this.getSubAdmins();
+      const subAdmin = subAdmins.find(admin => 
+        (admin.email === emailOrId || admin.id === emailOrId) && 
+        admin.status === 'approved'
+      );
+
+      if (subAdmin) {
+        return { success: true, user: subAdmin };
+      }
+
+      return { success: false, error: 'User not found or not approved' };
+    } catch (error) {
+      return { success: false, error: 'Failed to verify user' };
+    }
   }
 
-  verifyOTP(mobileOTP, emailOTP) {
-    const otpData = localStorage.getItem('tempOTP');
-    if (!otpData) {
-      return { success: false, error: 'OTP expired or not found' };
+  // OTP Service Integration
+  async sendOTP(phone, email, userName = 'Admin') {
+    try {
+      // Import OTP service dynamically to avoid circular dependencies
+      const { default: otpService } = await import('./OTPService.js');
+      
+      return await otpService.sendDualOTP(phone, email, userName);
+    } catch (error) {
+      console.error('AuthService OTP Error:', error);
+      return { 
+        success: false, 
+        error: 'Failed to send OTP. Please try again.' 
+      };
     }
-    
-    const { mobile, email } = JSON.parse(otpData);
-    const now = Date.now();
-    
-    // Check if OTP is expired (5 minutes)
-    if (now - mobile.timestamp > 300000 || now - email.timestamp > 300000) {
-      localStorage.removeItem('tempOTP');
-      return { success: false, error: 'OTP expired' };
+  }
+
+  async verifyOTP(mobileOTP, emailOTP, sessionId = null) {
+    try {
+      // Import OTP service dynamically to avoid circular dependencies
+      const { default: otpService } = await import('./OTPService.js');
+      
+      return await otpService.verifyDualOTP(mobileOTP, emailOTP, sessionId);
+    } catch (error) {
+      console.error('AuthService OTP Verification Error:', error);
+      return { 
+        success: false, 
+        error: 'OTP verification failed. Please try again.' 
+      };
     }
-    
-    // Verify both OTPs
-    if (mobile.otp === mobileOTP && email.otp === emailOTP) {
-      localStorage.removeItem('tempOTP');
-      return { success: true, message: 'OTP verified successfully' };
+  }
+
+  // Login with OTP (after OTP verification)
+  async loginWithOTP(emailOrId) {
+    try {
+      const userResult = await this.verifyUserExists(emailOrId);
+      
+      if (!userResult.success) {
+        return { success: false, error: userResult.error };
+      }
+
+      const userData = userResult.user;
+      let user = null;
+
+      // Create user session based on user type
+      if (userData.role === 'super_admin' || userData === this.adminCredentials.superAdmin) {
+        user = {
+          id: userData.id,
+          email: userData.email,
+          name: userData.name,
+          role: 'super_admin',
+          avatar: userData.avatar || null
+        };
+      } else if (userData.role === 'admin' || userData === this.adminCredentials.admin) {
+        user = {
+          id: userData.id,
+          email: userData.email,
+          name: userData.name,
+          role: 'admin',
+          avatar: userData.avatar || null
+        };
+      } else {
+        // Sub admin
+        user = {
+          id: userData.id,
+          email: userData.email,
+          name: userData.name,
+          role: 'sub_admin',
+          avatar: userData.avatar || null,
+          permissions: userData.permissions || []
+        };
+      }
+
+      const token = this.generateToken(user);
+      const session = {
+        user,
+        token,
+        loginTime: new Date().toISOString(),
+        lastActivity: new Date().toISOString(),
+        loginMethod: 'otp'
+      };
+
+      localStorage.setItem('adminSession', JSON.stringify(session));
+      this.startSessionTimer();
+
+      return { success: true, user, token };
+    } catch (error) {
+      return { success: false, error: 'Login failed after OTP verification' };
     }
-    
-    return { success: false, error: 'Invalid OTP' };
   }
 
   // Request password reset (placeholder for future backend integration)

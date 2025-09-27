@@ -9,7 +9,9 @@ import {
   FaLinkedin,
   FaChevronUp,
   FaDownload,
-  FaArrowUp
+  FaArrowUp,
+  FaWhatsapp,
+  FaPhoneAlt
 } from 'react-icons/fa';
 import { siteConfig } from '../config/site';
 import { branches } from '../data/branches';
@@ -22,7 +24,6 @@ const Footer = ({ scrollToSection }) => {
     { id: 'services', label: 'Services' },
     { id: 'doctors', label: 'Our Team' },
     { id: 'highlights', label: 'Why Choose Us' },
-    { id: 'faq', label: 'FAQ' },
     { id: 'appointment', label: 'Book Appointment' }
   ];
 
@@ -78,7 +79,7 @@ const Footer = ({ scrollToSection }) => {
               </div>
               
               <div className="flex items-center space-x-3">
-                <FaPhone className="text-primary-400 flex-shrink-0" size={16} />
+                <FaPhoneAlt className="text-primary-400 flex-shrink-0" size={16} />
                 <div className="flex flex-wrap gap-2">
                   {siteConfig.phones.map((phone, index) => (
                     <a
@@ -154,6 +155,15 @@ const Footer = ({ scrollToSection }) => {
               <h5 className="text-sm font-semibold text-white mb-4">Follow Us</h5>
               <div className="flex space-x-4">
                 <a
+                  href="https://wa.me/919051864455"
+                  className="w-8 h-8 bg-neutral-800 rounded-full flex items-center justify-center text-neutral-400 hover:text-green-400 hover:bg-neutral-700 transition-all"
+                  aria-label="WhatsApp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaWhatsapp size={16} />
+                </a>
+                <a
                   href="https://facebook.com"
                   className="w-8 h-8 bg-neutral-800 rounded-full flex items-center justify-center text-neutral-400 hover:text-primary-400 hover:bg-neutral-700 transition-all"
                   aria-label="Facebook"
@@ -191,40 +201,12 @@ const Footer = ({ scrollToSection }) => {
         <div className="section-container py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm text-neutral-400">
-              <p>© {currentYear} {siteConfig.name}. All rights reserved.</p>
-              <div className="flex space-x-4">
-                <a href="/privacy" className="hover:text-primary-400 transition-colors">
-                  Privacy Policy
-                </a>
-                <a href="/terms" className="hover:text-primary-400 transition-colors">
-                  Terms of Service
-                </a>
-              </div>
+              <p>Developed by Simtrak Solutions</p>
             </div>
-
-            {/* Back to Top */}
-            <button
-              onClick={scrollToTop}
-              className="flex items-center space-x-2 text-neutral-400 hover:text-primary-400 transition-colors text-sm group"
-              aria-label="Back to top"
-            >
-              <span>Back to Top</span>
-              <FaArrowUp className="group-hover:transform group-hover:-translate-y-1 transition-transform" size={14} />
-            </button>
           </div>
         </div>
       </div>
 
-      {/* Disclaimer */}
-      <div className="bg-neutral-950 border-t border-neutral-800">
-        <div className="section-container py-4">
-          <p className="text-xs text-neutral-500 text-center leading-relaxed">
-            <strong>Medical Disclaimer:</strong> The information on this website is for educational purposes only 
-            and should not be used as a substitute for professional medical advice. Please consult with a 
-            qualified healthcare provider for diagnosis and treatment recommendations.
-          </p>
-        </div>
-      </div>
     </footer>
   );
 };
