@@ -8,24 +8,6 @@ import PatientFeedbackTicker from './components/PatientFeedbackTicker.js';
 import Location from './components/Location.js';
 import HighlightsBullets from './components/HighlightsBullets.js';
 import Footer from './components/Footer.js';
-import AdminLogin from './components/admin/AdminLogin.js';
-import AdminLayout from './components/admin/AdminLayout.js';
-import ProtectedRoute from './components/admin/ProtectedRoute.js';
-import Dashboard from './components/admin/Dashboard.js';
-import DoctorsManagement from './components/admin/DoctorsManagement.js';
-import DoctorForm from './components/admin/DoctorForm.js';
-import ServicesManagement from './components/admin/ServicesManagement.js';
-import ServiceForm from './components/admin/ServiceForm.js';
-import AppointmentManagement from './components/admin/AppointmentManagement.js';
-import ContentManagement from './components/admin/ContentManagement.js';
-import MediaLibrary from './components/admin/MediaLibrary.js';
-import AdminSettings from './components/admin/AdminSettings.js';
-import UserManagement from './components/admin/UserManagement.js';
-import Analytics from './components/admin/Analytics.js';
-import SuperAdminManagement from './components/admin/SuperAdminManagement.js';
-import CalendarManagement from './components/admin/CalendarManagement.js';
-import WebsiteContentManager from './components/admin/WebsiteContentManager.js';
-import WorkTracker from './components/admin/WorkTracker.js';
 
 // Public site component
 const PublicSite = () => {
@@ -114,36 +96,6 @@ function App() {
       <Routes>
         {/* Public routes */}
         <Route path="/" element={<PublicSite />} />
-        
-        {/* Admin routes */}
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<Navigate to="/" replace />} />
-        <Route
-          path="/admin/*"
-          element={
-            <ProtectedRoute>
-              <AdminLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="analytics" element={<Analytics />} />
-          <Route path="users" element={<UserManagement />} />
-          <Route path="super-admin" element={<SuperAdminManagement />} />
-          <Route path="calendar" element={<CalendarManagement />} />
-          <Route path="website-content" element={<WebsiteContentManager />} />
-          <Route path="work-tracker" element={<WorkTracker />} />
-          <Route path="doctors" element={<DoctorsManagement />} />
-          <Route path="doctors/new" element={<DoctorForm />} />
-          <Route path="doctors/:id/edit" element={<DoctorForm />} />
-          <Route path="services" element={<ServicesManagement />} />
-          <Route path="services/new" element={<ServiceForm />} />
-          <Route path="services/:id/edit" element={<ServiceForm />} />
-          <Route path="appointments" element={<AppointmentManagement />} />
-          <Route path="content" element={<ContentManagement />} />
-          <Route path="media" element={<MediaLibrary />} />
-          <Route path="settings" element={<AdminSettings />} />
-        </Route>
         
         {/* Catch all route */}
         <Route path="*" element={<Navigate to="/" replace />} />

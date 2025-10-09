@@ -1,7 +1,6 @@
 import React from 'react';
 import { 
   FaMapMarkerAlt, 
-  FaClock, 
   FaPhoneAlt, 
   FaEnvelope, 
   FaDirections 
@@ -36,53 +35,38 @@ const Location = () => {
                     <p className="text-lg font-semibold text-neutral-900">
                       {siteConfig.address.full}
                     </p>
-                    <button 
-                      onClick={() => window.open('https://maps.google.com/?q=Dr.+Gandhi\'s+Dental+Avenue+New+Town+Kolkata', '_blank')}
-                      className="mt-2 bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors flex items-center space-x-2"
-                    >
-                      <FaDirections size={16} />
-                      <span>Get Location</span>
-                    </button>
                   </div>
-                </div>
-                
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <a href="tel:+919051864455" className="text-lg font-medium text-primary-600 hover:text-primary-700">
-                      +91 9051864455
-                    </a>
-                    <FaPhoneAlt className="text-green-600" size={18} />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <a href="tel:+919830032088" className="text-lg font-medium text-primary-600 hover:text-primary-700">
-                      +91 9830032088
-                    </a>
-                    <FaPhoneAlt className="text-green-600" size={18} />
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-3">
-                  <FaEnvelope className="text-purple-600" size={18} />
-                  <a href={`mailto:${siteConfig.email}`} className="text-lg font-medium text-primary-600 hover:text-primary-700">
-                    {siteConfig.email}
-                  </a>
                 </div>
               </div>
             </div>
             
-            {/* Small map for main office */}
-            <div className="bg-white rounded-xl overflow-hidden shadow-lg">
-              <div className="aspect-video relative">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.0123456789!2d88.4324567890123!3d22.5678901234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sNew%20Town%2C%20Kolkata!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Newtown Clinic"
-                ></iframe>
+            {/* Map - Click to open Google Maps */}
+            <div 
+              className="bg-gradient-to-br from-blue-50 via-teal-50 to-green-50 rounded-xl overflow-hidden shadow-lg cursor-pointer hover:shadow-2xl transition-all hover:scale-[1.02] duration-300 relative group border-2 border-primary-200"
+              onClick={() => window.open('https://maps.app.goo.gl/dSCFKBRRXTGVRGCm9', '_blank')}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  window.open('https://maps.app.goo.gl/dSCFKBRRXTGVRGCm9', '_blank');
+                }
+              }}
+            >
+              <div className="aspect-video relative flex items-center justify-center p-8">
+                <div className="text-center space-y-4">
+                  <div className="w-20 h-20 bg-primary-600 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform">
+                    <FaMapMarkerAlt className="text-white" size={40} />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-neutral-900 mb-2">View Our Location</h4>
+                    <p className="text-neutral-600 mb-4">Disha Eye Hospital, New Town</p>
+                    <div className="inline-flex items-center space-x-2 bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold group-hover:bg-primary-700 transition-colors">
+                      <FaDirections size={18} />
+                      <span>Open in Google Maps</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -96,7 +80,7 @@ const Location = () => {
               {
                 name: "Lansdowne Paddapukur",
                 address: "Lansdowne Paddapukur, Kolkata",
-                url: "https://maps.google.com/?q=Lansdowne+Paddapukur+Kolkata"
+                url: "https://maps.app.goo.gl/9sjIb8sR6NzjTp4Z8"
               },
               {
                 name: "Medica Superspeciality Hospital",
@@ -134,19 +118,10 @@ const Location = () => {
           {/* Contact Us - Single Card */}
           <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 shadow-xl border-2 border-gradient-to-r from-blue-200 to-purple-200 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
             <div className="text-center">
-              <div className="flex justify-center space-x-4 mb-6">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                  <FaPhoneAlt className="text-blue-600" size={20} />
-                </div>
-                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                  <FaEnvelope className="text-purple-600" size={20} />
-                </div>
-              </div>
-              <h3 className="text-2xl font-bold text-neutral-900 mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Contact Us</h3>
+              <h3 className="text-2xl font-bold text-neutral-900 mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Contact Us</h3>
               
               {/* Phone Numbers */}
               <div className="space-y-3 mb-6">
-                <h4 className="text-lg font-semibold text-neutral-800 mb-3">Call Us</h4>
                 {siteConfig.phones.map((phone, index) => (
                   <a
                     key={index}
@@ -161,7 +136,6 @@ const Location = () => {
               
               {/* Email */}
               <div>
-                <h4 className="text-lg font-semibold text-neutral-800 mb-3">Email Us</h4>
                 <a
                   href={`mailto:${siteConfig.email}`}
                   className="inline-flex items-center space-x-3 text-lg font-semibold text-purple-600 hover:text-purple-700 transition-colors py-3 px-6 rounded-lg hover:bg-white hover:bg-opacity-80 border border-purple-200 hover:border-purple-300"

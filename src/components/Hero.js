@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaPhoneAlt, FaClock, FaEye } from 'react-icons/fa';
+import { FaPhoneAlt, FaEye } from 'react-icons/fa';
 import { siteConfig } from '../config/site';
 import Button from './ui/Button.js';
 import useInView from '../hooks/useInView.js';
@@ -93,23 +93,16 @@ const Hero = ({ scrollToSection }) => {
 
             {/* Quick Info */}
             <div className={`pt-8 border-t border-white/50 ${isHeroInView ? 'animate-in animate-in-delay-300' : 'opacity-0'}`}>
-              <div className="bg-white/90 backdrop-blur-md rounded-xl p-3 sm:p-4 border border-white/50 shadow-xl">
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary-600 rounded-lg flex items-center justify-center shadow-sm">
-                    <FaClock className="text-white" size={14} />
+              <div className="bg-white/90 backdrop-blur-md rounded-xl p-4 sm:p-5 border border-white/50 shadow-xl">
+                <h3 className="font-semibold text-neutral-900 mb-3 text-base sm:text-lg">Clinic Hours</h3>
+                <div className="text-sm sm:text-base space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="text-neutral-700 font-medium">Mon - Sat</span>
+                    <span className="text-primary-600 font-semibold bg-primary-50 px-3 py-1 rounded-lg">9 AM - 5 PM</span>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-neutral-900 mb-2 text-sm sm:text-base">Clinic Hours</h3>
-                    <div className="text-xs sm:text-sm space-y-1">
-                      <div className="flex justify-between items-center">
-                        <span className="text-neutral-700 truncate">Mon - Sat</span>
-                        <span className="text-primary-600 font-semibold bg-primary-50 px-1.5 py-0.5 rounded text-xs ml-2 flex-shrink-0">9 AM - 5 PM</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-neutral-700 truncate">Sunday</span>
-                        <span className="text-red-600 font-semibold bg-red-50 px-1.5 py-0.5 rounded text-xs ml-2 flex-shrink-0">Closed</span>
-                      </div>
-                    </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-neutral-700 font-medium">Sunday</span>
+                    <span className="text-red-600 font-semibold bg-red-50 px-3 py-1 rounded-lg">Closed</span>
                   </div>
                 </div>
               </div>

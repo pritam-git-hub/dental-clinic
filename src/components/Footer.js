@@ -1,15 +1,11 @@
 import React from 'react';
 import { 
-  FaPhone, 
   FaEnvelope, 
   FaMapMarkerAlt, 
   FaClock,
   FaFacebook,
   FaInstagram,
   FaLinkedin,
-  FaChevronUp,
-  FaDownload,
-  FaArrowUp,
   FaWhatsapp,
   FaPhoneAlt
 } from 'react-icons/fa';
@@ -23,16 +19,8 @@ const Footer = ({ scrollToSection }) => {
     { id: 'home', label: 'Home' },
     { id: 'services', label: 'Services' },
     { id: 'doctors', label: 'Our Team' },
-    { id: 'highlights', label: 'Why Choose Us' },
-    { id: 'appointment', label: 'Book Appointment' }
+    { id: 'highlights', label: 'Why Choose Us' }
   ];
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
 
   return (
     <footer className="bg-neutral-900 text-white">
@@ -127,7 +115,7 @@ const Footer = ({ scrollToSection }) => {
             {branches.map((branch, index) => {
               // Create Google Maps search URLs for each branch
               const branchUrls = {
-                'Lansdowne Paddapukur, Kolkata': 'https://maps.google.com/?q=Lansdowne+Paddapukur+Kolkata',
+                'Lansdowne Paddapukur, Kolkata': 'https://maps.app.goo.gl/9sjIb8sR6NzjTp4Z8',
                 'Medica Superspeciality Hospital, Kolkata': 'https://maps.google.com/?q=Medica+Superspeciality+Hospital+Kolkata',
                 'Sunny Enclave, Mohali, Punjab': 'https://maps.google.com/?q=Sunny+Enclave+Mohali+Punjab'
               };
@@ -199,10 +187,16 @@ const Footer = ({ scrollToSection }) => {
       {/* Bottom Bar */}
       <div className="border-t border-neutral-800">
         <div className="section-container py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm text-neutral-400">
-              <p>Developed by Simtrak Solutions</p>
-            </div>
+          <div className="flex flex-col items-center space-y-3">
+            {/* Copyright */}
+            <p className="text-sm text-neutral-400 text-center">
+              © {currentYear} DR. GANDHI'S DENTAL AVENUE. All rights reserved.
+            </p>
+            
+            {/* Developed By */}
+            <p className="text-sm text-neutral-500">
+              Developed by <span className="text-primary-400 font-semibold">Simtrak Solutions</span>
+            </p>
           </div>
         </div>
       </div>

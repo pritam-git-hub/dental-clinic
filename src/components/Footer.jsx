@@ -5,7 +5,6 @@ import {
   FaEnvelope, 
   FaClock,
   FaFacebook,
-  FaTwitter,
   FaInstagram,
   FaLinkedin,
   FaArrowUp
@@ -20,8 +19,7 @@ const Footer = ({ scrollToSection }) => {
     { id: 'services', label: 'Services' },
     { id: 'doctors', label: 'Our Team' },
     { id: 'highlights', label: 'Why Choose Us' },
-    { id: 'faq', label: 'FAQ' },
-    { id: 'appointment', label: 'Book Appointment' }
+    { id: 'faq', label: 'FAQ' }
   ];
 
   const scrollToTop = () => {
